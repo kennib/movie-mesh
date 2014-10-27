@@ -1,0 +1,26 @@
+{
+  "name": "movie-mesh",
+  "version": "0.0.0",
+  "description": "An application for collaborative movie editing over a mesh network",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/kennib/movie-mesh.git"
+  },
+  "keywords": [
+    "video",
+    "edit",
+    "movie",
+    "mesh",
+    "collaborate"
+  ],
+  "author": "Kenni Bawden",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kennib/movie-mesh/issues"
+  },
+  "homepage": "https://github.com/kennib/movie-mesh"
+}
