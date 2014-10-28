@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "rtc-quickconnect": "",
-    "rtc-mesh": ""
+    "rtc-mesh": "",
+    "rtc-media": ""
   },
   "devDependencies": {
     "browserify": "",
