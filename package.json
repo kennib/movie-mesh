@@ -10,7 +10,9 @@
   "dependencies": {
     "rtc-quickconnect": "",
     "rtc-mesh": "",
-    "rtc-media": ""
+    "rtc-media": "",
+    "crdt": "",
+    "uuid": ""
   },
   "devDependencies": {
     "browserify": "",

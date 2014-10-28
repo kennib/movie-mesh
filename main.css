@@ -6,6 +6,10 @@
   padding: 0px;
 }
 
+.streams .stream.promoted {
+  background-color: #FF5B51 !important;
+}
+
 .streams .stream:nth-child(odd) {
   background-color: #F4F4F4;
 }
@@ -39,4 +43,18 @@
 }
 .streams .stream button:focus {
   outline: none;
+}
+
+.streams .stream .count {
+  display: inline-block;
+  width: 100px;
+  margin: 0px;
+
+  font-size: 80px;
+
+  color:  #FF5B51;
+}
+
+.streams .stream.promoted .count {
+  color: #FAFAFA;
 }
