@@ -17,16 +17,25 @@
   background-color: #FAFAFA;
 }
 
-.streams .stream video {
-  float: left;
+.streams .stream .video {
+  display: inline-block;
+  height: 180px;
+  width: 240px;
+  max-width: 40%;
+
+  vertical-align: bottom;
+}
+.streams .stream .video video {
+  float: right;
   height: 180px;
   margin-bottom: -4px;
 }
 
 .streams .stream button {
   width: 100px;
-  height: 100px;
-  margin: 40px;  
+  max-width: 30%;
+  height: 180px;
+  margin: 0px;
 
   font-size: 80px;
 
@@ -36,10 +45,10 @@
 }
 
 .streams .stream button:hover {
-  box-shadow: inset 3px 3px rgba(0,0,0, 0.2);
+  box-shadow: inset 5px 0px rgba(0,0,0, 0.2);
 }
 .streams .stream button:active {
-  box-shadow: inset 10px 10px rgba(0,0,0, 0.2);
+  box-shadow: inset 10px 0px 5px rgba(0,0,0, 0.2);
 }
 .streams .stream button:focus {
   outline: none;
@@ -48,6 +57,7 @@
 .streams .stream .count {
   display: inline-block;
   width: 100px;
+  max-width: 30%;
   margin: 0px;
 
   font-size: 80px;

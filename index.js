@@ -60,6 +60,10 @@ function renderMedia(media, id) {
     stream.className = 'stream';
     streams.appendChild(stream);
 
+    var video = document.createElement('div');
+    video.className = 'video';
+    stream.appendChild(video);
+
     var button = document.createElement('button');
     var icon = document.createElement('i');
     icon.className = 'fa fa-thumbs-o-up';
@@ -71,7 +75,7 @@ function renderMedia(media, id) {
     count.className = 'count';
     stream.appendChild(count);
     
-    media.render(stream);
+    media.render(video);
 
     return stream;
 }
