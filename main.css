@@ -7,13 +7,36 @@
 }
 
 .streams .stream:nth-child(odd) {
-  background-color: #EEE;
+  background-color: #F4F4F4;
 }
 .streams .stream:nth-child(even) {
   background-color: #FAFAFA;
 }
 
 .streams .stream video {
+  float: left;
   height: 180px;
   margin-bottom: -4px;
+}
+
+.streams .stream button {
+  width: 100px;
+  height: 100px;
+  margin: 40px;  
+
+  font-size: 80px;
+
+  color: #FAFAFA;
+  background-color: #FF5B51;
+  border: none;
+}
+
+.streams .stream button:hover {
+  box-shadow: inset 3px 3px rgba(0,0,0, 0.2);
+}
+.streams .stream button:active {
+  box-shadow: inset 10px 10px rgba(0,0,0, 0.2);
+}
+.streams .stream button:focus {
+  outline: none;
 }

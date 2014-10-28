@@ -44,6 +44,12 @@ function renderMedia(media) {
     var stream = document.createElement('div');
     stream.className = 'stream';
     streams.appendChild(stream);
+
+    var button = document.createElement('button');
+    var icon = document.createElement('i');
+    icon.className = 'fa fa-thumbs-o-up';
+    button.appendChild(icon);
+    stream.appendChild(button);
     
     media.render(stream);
 
