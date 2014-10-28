@@ -4,7 +4,16 @@
   "description": "An application for collaborative movie editing over a mesh network",
   "main": "index.js",
   "scripts": {
+    "start": "beefy index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "rtc-quickconnect": "",
+    "rtc-mesh": ""
+  },
+  "devDependencies": {
+    "browserify": "",
+    "beefy": ""
   },
   "repository": {
     "type": "git",
