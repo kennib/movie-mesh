@@ -1,0 +1,19 @@
+.streams {
+  height: 100%;
+}
+
+.streams .stream {
+  padding: 0px;
+}
+
+.streams .stream:nth-child(odd) {
+  background-color: #EEE;
+}
+.streams .stream:nth-child(even) {
+  background-color: #FAFAFA;
+}
+
+.streams .stream video {
+  height: 180px;
+  margin-bottom: -4px;
+}
