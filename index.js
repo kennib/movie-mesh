@@ -9,7 +9,7 @@ var Doc = require('crdt').Doc;
 var uuid = require('uuid');
 
 // JQuery
-var $ = require('jquery');
+$ = require('jquery');
 
 // Initialise the connection
 var qc = quickconnect('http://switchboard.rtc.io', {
@@ -139,9 +139,43 @@ function updatePromotions() {
     var streams = peerMedia[p];
     if (streams) {
       streams.forEach(function(stream) {
+        if (stream.attr('data-promotions') != (promotions[p] || -1))
+          stream.attr('data-changed', '');
+        else
+          stream.removeAttr('data-changed');
+
+        stream.attr('data-promotions', promotions[p] || -1)
         stream.find('.count')
           .text(promotions[p] || '-');
       });
     }
   }
+
+  // Re order streams
+  var streams = $('.streams');
+  var streamElems = streams.children('.stream');
+  streamElems.sort(function(a,b) {
+    var an = a.getAttribute('data-promotions'),
+        bn = b.getAttribute('data-promotions');
+
+    if(an < bn) {
+      return 1;
+    }
+    if(an > bn) {
+      return -1;
+    }
+    return 0;
+  });
+
+  streamElems
+    .detach()
+    .each(function(s, stream) {
+      if (stream.hasAttribute('data-changed'))
+        $(stream).fadeIn();
+    })
+    .appendTo(streams);
+
+  streamElems.find('video').each(function(v, video) {
+    video.play();
+  });
 }
