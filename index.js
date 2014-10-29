@@ -80,8 +80,19 @@ function renderMedia(media, id) {
     stream.appendChild(count);
     
     media.render(video);
+    streamVideo(stream, function(video) {
+      video.setAttribute('muted', '');
+    });
 
     return stream;
+}
+
+// Apply functions to the stream's video
+function streamVideo(stream, func) {
+  var videos = stream.getElementsByTagName('video');
+  
+  for (var v=0; v<videos.length; v++)
+    func(videos[v]);
 }
 
 
@@ -106,11 +117,19 @@ model.add({id: user, promoted: undefined});
 function promoteStream(stream, id) {
   // Unpromote other streams
   for (var s=0; s<streams.childNodes.length; s++) {
-    streams.childNodes[s].className = 'stream';
+    var astream = streams.childNodes[s];
+    astream.className = 'stream';
+    streamVideo(astream, function(video) {
+      video.setAttribute('muted', '');
+    });
   } 
 
   // Promote this stream
   stream.className = 'stream promoted';
+  var videos = stream.getElementsByTagName('video');
+  streamVideo(stream, function(video) {
+    video.removeAttribute('muted');
+  });
 
   model.set(user, {promoted: id});
 }
