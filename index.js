@@ -2,6 +2,7 @@
 var quickconnect = require('rtc-quickconnect');
 var mesh = require('rtc-mesh');
 var media = require('rtc-media');
+var freeice = require('freeice');
 
 // Import CRDT distributed data stuctures
 var Doc = require('crdt').Doc;
@@ -11,6 +12,8 @@ var uuid = require('uuid');
 // Initialise the connection
 var qc = quickconnect('http://switchboard.rtc.io', {
   room: 'movie-mesh-crdt',
+  iceServers: freeice(),
+  expectedLocalStreams: 1,
 });
 
 // Create the model
@@ -41,6 +44,7 @@ localMedia.once('capture', function(stream) {
   })
   // when a peer leaves, remove the media
   .on('call:ended', function(id) {
+    console.log('peer disconnected: ', id);
     // Remove media for the target peer from the dom
     (peerMedia[id] || []).splice(0).forEach(function(el) {
       el.parentNode.removeChild(el);

@@ -8,9 +8,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "rtc-quickconnect": "",
+    "rtc-quickconnect": "~4",
     "rtc-mesh": "",
     "rtc-media": "",
+    "freeice": "",
     "crdt": "",
     "uuid": ""
   },
