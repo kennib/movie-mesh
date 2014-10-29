@@ -25,7 +25,15 @@ var model = mesh(qc, { model: new Doc() });
 model.on('row_update', updatePromotions);
 
 // Capture local media
-var localMedia = media();
+var localMedia = media({
+  video: {
+    mandatory: {
+      maxWidth: 320,
+      maxHeight: 240,
+    },
+  },
+  audio: true,
+});
 
 // Give and recieve video from peers
 localMedia.once('capture', function(stream) {
