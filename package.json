@@ -13,7 +13,8 @@
     "rtc-media": "",
     "freeice": "",
     "crdt": "",
-    "uuid": ""
+    "uuid": "",
+    "jquery": ""
   },
   "devDependencies": {
     "browserify": "",

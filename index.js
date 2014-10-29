@@ -8,6 +8,8 @@ var freeice = require('freeice');
 var Doc = require('crdt').Doc;
 var uuid = require('uuid');
 
+// JQuery
+var $ = require('jquery');
 
 // Initialise the connection
 var qc = quickconnect('http://switchboard.rtc.io', {
@@ -46,53 +48,45 @@ localMedia.once('capture', function(stream) {
   .on('call:ended', function(id) {
     console.log('peer disconnected: ', id);
     // Remove media for the target peer from the dom
-    (peerMedia[id] || []).splice(0).forEach(function(el) {
-      el.parentNode.removeChild(el);
+    (peerMedia[id] || []).splice(0).forEach(function(stream) {
+      stream.remove();
     });
   })
 });
 
 
 // Create the elements
-var streams = document.createElement('div');
-streams.className = 'streams';
-document.body.appendChild(streams);
+var streams = $('<div>')
+  .addClass('streams')
+  .appendTo(document.body);
 
 // Render a video
 function renderMedia(media, id) {
-    var stream = document.createElement('div');
-    stream.className = 'stream';
-    streams.appendChild(stream);
+    var stream = $('<div>')
+      .addClass('stream')
+      .appendTo(streams);
 
-    var video = document.createElement('div');
-    video.className = 'video';
-    stream.appendChild(video);
+    var video = $('<div>')
+      .addClass('video')
+      .appendTo(stream);
 
-    var button = document.createElement('button');
-    var icon = document.createElement('i');
-    icon.className = 'fa fa-thumbs-o-up';
-    button.onclick = promoteStream.bind(this, stream, id);
-    button.appendChild(icon);
-    stream.appendChild(button);
+    var button = $('<button>')
+      .click(promoteStream.bind(this, stream, id))
+      .appendTo(stream);
+    var icon = $('<i>')
+      .addClass('fa fa-thumbs-o-up')
+      .appendTo(button);
 
-    var count = document.createElement('p');
-    count.className = 'count';
-    stream.appendChild(count);
+    var count = $('<p>')
+      .addClass('count')
+      .appendTo(stream);
     
-    media.render(video);
-    streamVideo(stream, function(video) {
-      video.setAttribute('muted', '');
+    media.render(video.get(0));
+    stream.find('video').each(function(v, video) {
+      $(video).attr('muted', '');
     });
 
     return stream;
-}
-
-// Apply functions to the stream's video
-function streamVideo(stream, func) {
-  var videos = stream.getElementsByTagName('video');
-  
-  for (var v=0; v<videos.length; v++)
-    func(videos[v]);
 }
 
 
@@ -116,19 +110,15 @@ model.add({id: user, promoted: undefined});
 
 function promoteStream(stream, id) {
   // Unpromote other streams
-  for (var s=0; s<streams.childNodes.length; s++) {
-    var astream = streams.childNodes[s];
-    astream.className = 'stream';
-    streamVideo(astream, function(video) {
-      video.setAttribute('muted', '');
-    });
-  } 
+  streams.find('.stream').removeClass('promoted');
+  streams.find('video').each(function(v, video) {
+    $(video).attr('muted', '');
+  });
 
   // Promote this stream
-  stream.className = 'stream promoted';
-  var videos = stream.getElementsByTagName('video');
-  streamVideo(stream, function(video) {
-    video.removeAttribute('muted');
+  stream.addClass('promoted');
+  stream.find('video').each(function(v, video) {
+    $(video).attr('muted');
   });
 
   model.set(user, {promoted: id});
@@ -149,8 +139,8 @@ function updatePromotions() {
     var streams = peerMedia[p];
     if (streams) {
       streams.forEach(function(stream) {
-        var count = stream.getElementsByClassName('count');
-        count[0].innerHTML = promotions[p] || '-';
+        stream.find('.count')
+          .text(promotions[p] || '-');
       });
     }
   }
